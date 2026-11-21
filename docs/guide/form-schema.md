@@ -97,6 +97,8 @@ const { visibleFields } = useFormSchema(meta, form, {
 
 `SchemaFields` 接收同样的 `meta`、`widgets`、`presets`、`locale`、`converters`、`classNames`、`slots`、`loading`、`error`，但不创建 Form，必须放在 `<Form>` 内。
 
+如果希望在整个项目里只配置一次 `presets`、`converters` 和 `locale`，使用 [项目级默认配置](./project-defaults) 的 `configureSchemaForm`。
+
 `FormFields` 只接收 `fields: BoundField[]`，按字段默认渲染 Form.Item，适合不需要自定义布局的 无 UI 场景。
 
 ## FormSchema 顶层配置
