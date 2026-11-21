@@ -23,7 +23,7 @@ features:
     description: 存储值与控件值双向转换，支持链式组合和表单级默认配置。
   - title: 查看 / 编辑
     emoji: 👁️
-    description: 同一份 schema 在编辑态与只读详情态之间切换，枚举值自动显示 label。
+    description: 同一份 schema 在编辑态与只读详情态之间切换，查看态用 Descriptions 展示并自动显示枚举 label。
   - title: 可扩展
     emoji: 🧩
     description: 自定义 widget、classNames、slots，并提供无 UI 的 useFormSchema。

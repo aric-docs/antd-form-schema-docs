@@ -105,11 +105,25 @@ const { visibleFields } = useFormSchema(meta, form, {
 | ------------------ | ------------------------------------ | ------------------------------------------------------ |
 | `fields`           | `FieldSchema[]`                      | 字段列表，必填。                                       |
 | `initialValues`    | `Record<string, any>`                | 表单初始值。`SchemaForm` / `SchemaFields` 会自动使用。 |
-| `viewMode`         | `boolean`                            | 整表只读模式，可被字段级 `viewMode` 覆盖。             |
+| `viewMode`         | `boolean`                            | 整表查看态；为 `true` 时用 `Descriptions` 渲染。       |
+| `view`             | `ViewConfig`                         | 查看态描述列表配置，仅 `viewMode: true` 时生效。       |
 | `disabled`         | `boolean`                            | 整表禁用，字段级 `disabled` 优先。                     |
 | `converters`       | `Record<string, string \| string[]>` | 表单级转换器默认值，按字段 key 配置。                  |
 | `normalizeValues`  | `(values) => values`                 | 提交前整表转换，`SchemaForm` 在 `onFinish` 前执行。    |
 | `name` / `version` | `string`                             | 业务元信息，不参与渲染。                               |
+
+`ViewConfig` 对应 antd `Descriptions` 的常用属性：
+
+| 属性        | 类型                               | 说明                       |
+| ----------- | ---------------------------------- | -------------------------- |
+| `title`     | `ReactNode`                        | 描述列表标题。             |
+| `extra`     | `ReactNode`                        | 标题右侧操作区。           |
+| `column`    | `number`                           | 每行列数，默认 `2`。       |
+| `bordered`  | `boolean`                          | 是否带边框，默认 `true`。  |
+| `size`      | `'default' \| 'middle' \| 'small'` | 尺寸，默认 `small`。       |
+| `layout`    | `'horizontal' \| 'vertical'`       | 标签与内容排布。           |
+| `colon`     | `boolean`                          | 是否显示冒号。             |
+| `className` | `string`                           | 描述列表根节点 className。 |
 
 ## FieldSchema 字段配置
 
@@ -118,7 +132,9 @@ const { visibleFields } = useFormSchema(meta, form, {
 | `key`           | `string`                                         | 唯一 id。默认按 `.` 拆成 name path，例如 `user.name`。                       |
 | `name`          | `NamePath`                                       | 显式数据路径，优先于 `key`。key 本身含点时可用 `!!!a.b` 转义。               |
 | `widget`        | `string \| ComponentType`                        | 控件 id 或组件，默认 `input`。                                               |
-| `viewWidget`    | `string \| ComponentType`                        | 只读模式下的控件，默认 `span`。                                              |
+| `viewWidget`    | `string \| ComponentType`                        | 查看态内容控件，默认 `span`（`ViewSpan`）。                                  |
+| `viewProps`     | `Record<string, any>`                            | 只传给查看态控件的 props，优先于 `widgetProps`。                             |
+| `viewSpan`      | `number`                                         | 查看态占几列，对应 `Descriptions.Item` 的 `span`。                           |
 | `widgetProps`   | `Record<string, any>`                            | 透传给控件的 props，例如 `{ mode: 'multiple' }`。                            |
 | `label`         | `ReactNode`                                      | 标签。显式配置优先于 presets 和内置标签。                                    |
 | `className`     | `string`                                         | 该字段 Form.Item 的 className。                                              |
@@ -130,7 +146,7 @@ const { visibleFields } = useFormSchema(meta, form, {
 | `initialValue`  | `any`                                            | 字段级初始值数据，挂在 `BoundField` 上供自定义渲染使用；不会写入 antd Form。 |
 | `disabled`      | `boolean`                                        | 禁用该控件。                                                                 |
 | `readOnly`      | `boolean`                                        | 只读属性透传给控件。                                                         |
-| `viewMode`      | `boolean`                                        | 字段级只读，覆盖表单级 `viewMode`。                                          |
+| `viewMode`      | `boolean`                                        | 表级关闭时，单独把该字段切成只读；表级为 `true` 时忽略。                     |
 | `watch`         | `NamePath[]`                                     | 函数式 condition 的显式依赖声明。                                            |
 | `dependencies`  | `NamePath[]`                                     | 透传给 antd `Form.Item`。                                                    |
 | `shouldUpdate`  | `boolean \| function`                            | 透传给 antd `Form.Item`。                                                    |
@@ -142,21 +158,21 @@ const { visibleFields } = useFormSchema(meta, form, {
 
 ## 内置 widgets
 
-| id               | 控件                   |
-| ---------------- | ---------------------- |
-| `input` / `text` | `Input`                |
-| `password`       | `Input.Password`       |
-| `textarea`       | `Input.TextArea`       |
-| `number`         | `InputNumber`          |
-| `date-picker`    | `DatePicker`           |
-| `date-time`      | `DatePicker`（带时间） |
-| `radio`          | `Radio`                |
-| `radio-group`    | `Radio.Group`          |
-| `checkbox`       | `Checkbox`             |
-| `switch`         | `Switch`               |
-| `checkbox-group` | `Checkbox.Group`       |
-| `select`         | `Select`               |
-| `span`           | 只读文本 `ViewSpan`    |
+| id               | 控件                          |
+| ---------------- | ----------------------------- |
+| `input` / `text` | `Input`                       |
+| `password`       | `Input.Password`              |
+| `textarea`       | `Input.TextArea`              |
+| `number`         | `InputNumber`                 |
+| `date-picker`    | `DatePicker`                  |
+| `date-time`      | `DatePicker`（带时间）        |
+| `radio`          | `Radio`                       |
+| `radio-group`    | `Radio.Group`                 |
+| `checkbox`       | `Checkbox`                    |
+| `switch`         | `Switch`                      |
+| `checkbox-group` | `Checkbox.Group`              |
+| `select`         | `Select`                      |
+| `span`           | 查看态默认值渲染器 `ViewSpan` |
 
 日期控件支持 `valueType`：
 
@@ -389,18 +405,105 @@ const meta: FormSchema = {
 
 ## 查看 / 编辑模式
 
-`viewMode` 打开后：
+`meta.viewMode: true` 时，`SchemaForm` / `SchemaFields` 会把可见字段渲染成 antd `Descriptions`，而不是一堆只读 `Form.Item`。字段值、option label、converter `read` 和隐藏字段提交语义都不变，只是展示方式换成详情描述列表。
 
-- 改用 `viewWidget` 渲染，默认是只读 `span`；
-- 枚举值显示为选项 label；
-- converter 只执行 `read`；
-- 不挂载写回逻辑。
-
-```tsx
-<SchemaForm meta={{ ...meta, viewMode }} />
+```ts
+const detailMeta: FormSchema = {
+  viewMode: true,
+  view: {
+    bordered: true,
+    size: 'small',
+    column: 2,
+  },
+  initialValues: detail,
+  fields: [
+    { key: 'name' },
+    { key: 'status', viewWidget: StatusTag },
+    { key: 'bio', viewSpan: 2 },
+  ],
+};
 ```
 
-字段级 `viewMode` 可以单独控制某个字段。
+不写 `view` 时默认是 `column: 2`、`bordered: true`、`size: 'small'`。
+
+### 字段跨列
+
+`viewSpan` 对应 `Descriptions.Item` 的 `span`：
+
+```ts
+fields: [{ key: 'name' }, { key: 'nickname' }, { key: 'bio', viewSpan: 2 }];
+```
+
+antd 仍会按自身行/列规则处理：如果一行剩余列数不够，`span` 会被收缩到剩余列数。要占满一行，通常让前面的字段先凑满 `column`。
+
+### 自定义查看内容
+
+`viewWidget` 默认是 `span`（`ViewSpan`），负责把值和 option label 渲染成文本。需要 Tag、链接、按钮等富内容时，直接传组件，或注册一个 widget id。
+
+```tsx
+function StatusTag({ initialValue, options }: any) {
+  const label =
+    options?.find((option: any) => option.value === initialValue)?.label ??
+    initialValue;
+  return (
+    <Tag color={initialValue === 'active' ? 'green' : 'default'}>{label}</Tag>
+  );
+}
+
+const meta: FormSchema = {
+  viewMode: true,
+  initialValues: { status: 'active' },
+  fields: [
+    {
+      key: 'status',
+      options: [
+        ['active', '活跃'],
+        ['disabled', '禁用'],
+      ],
+      viewWidget: StatusTag,
+    },
+  ],
+};
+```
+
+`viewWidget` 收到的 props 包括 `initialValue`、`options`，以及字段的 `widgetProps`；需要查看态独有属性时用 `viewProps`：
+
+```ts
+fields: [
+  {
+    key: 'status',
+    viewWidget: 'status-tag',
+    viewProps: { activeColor: 'green' },
+  },
+];
+```
+
+合并顺序是 `widgetProps` → `viewProps` → `initialValue`，`initialValue` 最后应用，不能被覆盖。
+
+### 行为边界
+
+- 表级 `viewMode: true` 是 all-or-nothing：字段级 `viewMode: false` 会被忽略，不能在同一张 Descriptions 里混入编辑控件。
+- 表级 `viewMode` 关闭时，字段级 `viewMode: true` 仍保留旧行为：该字段渲染成只读 `Form.Item`。
+- 查看态不显示必填星号、校验错误和编辑控件；可见字段会额外挂一个不渲染 UI 的 `noStyle` 值载体，所以 `onFinish` 仍能拿到完整表单值。
+- `hidden` 字段不进入 Descriptions，但仍以 `Form.Item hidden` 保留值。
+- `slots.label` 和 `slots.control` 在查看态继续生效；`slots.field` 没有 `Form.Item` 可包裹，查看态下忽略。
+- `classNames.field` 应用到 `Descriptions.Item`；`classNames.label` / `classNames.control` 分别包裹标签和内容。
+
+### 与编辑态共用一份 schema
+
+```tsx
+<SchemaForm
+  meta={{
+    ...detailMeta,
+    viewMode: !editing,
+    initialValues: detail,
+  }}
+  presets={presets}
+  onFinish={handleSave}
+>
+  {editing && <SaveButtons />}
+</SchemaForm>
+```
 
 ## classNames 与 slots
 
@@ -473,7 +576,7 @@ const slots: FormSlots = {
 - `itemProps`：可直接展开给 antd `Form.Item`
 - `control`：已经绑定好的控件 React 元素
 - `controlProps`：控件原始 props
-- `viewContent` / `WidgetComponent`
+- `viewContent` / `viewSpan` / `viewProps` / `WidgetComponent`
 - `converter`：实际生效的转换器 id 或链，便于调试
 
 ## 自定义 widget

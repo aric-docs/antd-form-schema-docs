@@ -33,6 +33,6 @@ schema 里只写 key，label 和 widget 由一份 presets 文件统一提供，�
 
 ## 查看 / 编辑
 
-同一份 schema 在编辑态和只读详情态之间切换，view 模式自动把枚举值显示为选项 label。
+同一份 schema 在编辑态和只读详情态之间切换。内置查看态的 `Descriptions` 配置、字段跨列和自定义内容见指南的「查看 / 编辑模式」章节。
 
 <code src="./demos/view-edit.tsx">查看 / 编辑</code>
