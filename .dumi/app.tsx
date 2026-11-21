@@ -7,7 +7,7 @@ export default defineApp({
     return (
       <>
         {/* 你的自定义组件 */}
-        <div className="custom-wrapper debug">{container}</div>
+        <div className="custom-wrapper">{container}</div>
       </>
     );
   },
