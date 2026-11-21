@@ -242,14 +242,27 @@ watch: ['qty'];
 
 ## Key presets 与内置标签
 
-presets 用于只写 key 的表单：schema 保留语义 key，label 和 widget 统一放在一个配置文件里。
+presets 用于只写 key 的表单：schema 保留语义 key，label、widget 和控件默认属性统一放在一个配置文件里。
 
 ```ts
 const presets: Presets = {
   fields: {
-    title: 'input',
-    status: 'select',
-    bio: 'textarea',
+    title: {
+      widget: 'input',
+      placeholder: '请输入标题',
+      allowClear: true,
+      maxLength: 60,
+    },
+    status: {
+      widget: 'select',
+      placeholder: '请选择状态',
+      showSearch: true,
+    },
+    bio: {
+      widget: 'textarea',
+      placeholder: '请输入个人简介',
+      autoSize: { minRows: 2, maxRows: 6 },
+    },
   },
   labels: {
     'zh-CN': { title: '标题', status: '状态', bio: '个人简介' },
@@ -264,13 +277,55 @@ const meta: FormSchema = {
 <SchemaForm meta={meta} presets={presets} locale="zh-CN" />;
 ```
 
+`fields[key]` 支持两种写法：
+
+- 字符串简写：`title: 'input'`，只指定控件；
+- 对象形式：`title: { widget: 'input', placeholder: '请输入标题', allowClear: true }`。
+
+对象形式中，`widget` 是保留键表示控件，其余属性都作为控件 props，值可以是字符串、数字、布尔、数组或对象。需要显式分组时可以写 `widgetProps`：
+
+```ts
+fields: {
+  title: {
+    widget: 'input',
+    placeholder: '请输入标题',
+    widgetProps: {
+      allowClear: true,
+      maxLength: 60,
+    },
+  },
+}
+```
+
+同一属性同时写在直接属性和 `widgetProps` 中时，`widgetProps` 优先。
+
+YAML 配置同样支持：
+
+```yaml
+fields:
+  title:
+    widget: input
+    placeholder: 请输入标题
+    allowClear: true
+  bio:
+    widget: textarea
+    autoSize:
+      minRows: 2
+      maxRows: 6
+```
+
 解析规则：
 
-1. schema 显式写的 `label` / `widget` 优先。
-2. 没有配置时使用 presets。
-3. label 再回退到内置标签，最后回退到 key 本身。
-4. 嵌套 key 先查完整 key，再查最后一段，例如 `user.name` → `name`。
-5. `locale` 默认 `zh-CN`，指定语言缺失时回退到中文。
+1. schema 显式写的 `widget` 优先于 presets；schema 只覆盖 `widget` 时，preset 的其他属性仍然生效。
+2. 控件属性逐 key 合并，优先级从高到低：
+   - schema 的 `widgetProps`；
+   - schema 字段级的 `placeholder` / `disabled` / `readOnly` / `options`；
+   - presets 的 `widgetProps`；
+   - presets 对象上的直接属性。
+3. schema 显式写的 `label` 优先。
+4. 没有配置时使用 presets；label 再回退到内置标签，最后回退到 key 本身。
+5. 嵌套 key 先查完整 key，再查最后一段，例如 `user.name` → `name`。
+6. `locale` 默认 `zh-CN`，指定语言缺失时回退到中文。
 
 内置标签覆盖常见 key：`title`、`name`、`nickname`、`email`、`phone`、`mobile`、`password`、`avatar`、`status`、`remark`、`description`、`content`、`address`、`type`、`code`、`sort`、`enabled`、`createdAt`、`updatedAt`，并提供中英文。
 
