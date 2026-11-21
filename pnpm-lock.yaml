@@ -15,8 +15,8 @@ importers:
         specifier: ^17.1.0
         version: 17.8.1
       '@jswork/antd-form-schema':
-        specifier: ^1.0.1
-        version: 1.0.1(antd@5.29.3(moment@2.31.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(classnames@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.0.2
+        version: 1.0.2(antd@5.29.3(moment@2.31.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(classnames@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@jswork/presets-tailwind':
         specifier: ^1.2.37
         version: 1.2.37
@@ -1440,8 +1440,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@jswork/antd-form-schema@1.0.1':
-    resolution: {integrity: sha512-p49vnkDcdP+PNwTcGpq84Tbr7vBcxQCarFB2xnj4BkqL0JNsuZvIlJBVg+UOkpOrC+/0tikobp3yuyjXYXAIuw==}
+  '@jswork/antd-form-schema@1.0.2':
+    resolution: {integrity: sha512-9KFjf7xNv2M04r4y9cE/8iu5x5MezFmZdiAsG7C6bnWqmFnuiY+RaIEAGv/OvWdy9LRJuNo8vOCk3HP0Dpgtxg==}
     peerDependencies:
       antd: '>=5'
       classnames: '*'
@@ -10009,7 +10009,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.3
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@jswork/antd-form-schema@1.0.1(antd@5.29.3(moment@2.31.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(classnames@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@jswork/antd-form-schema@1.0.2(antd@5.29.3(moment@2.31.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(classnames@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@jswork/react-list': 2.0.18
       antd: 5.29.3(moment@2.31.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
