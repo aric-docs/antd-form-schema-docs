@@ -1,5 +1,5 @@
 ---
-title: Guide
+title: 指南
 order: 0
 ---
 
@@ -10,11 +10,11 @@ order: 0
 ## 阅读顺序
 
 1. [表单 Schema 全指南](./form-schema) — 覆盖 `SchemaForm`、`SchemaFields`、`useFormSchema`、widgets、presets、条件、只读模式、converters、classNames/slots、异步 meta 等全部特性。
-2. [Playground](/playground) — 常用场景的可运行示例。
+2. [演练场](/playground) — 常用场景的可运行示例。
 
 ## 特性一览
 
-- 三种渲染入口：`SchemaForm`、`SchemaFields`、headless 的 `useFormSchema`
+- 三种渲染入口：`SchemaForm`、`SchemaFields`、无 UI 的 `useFormSchema`
 - 14 个内置 widget：输入、数字、日期、单选、多选、开关、下拉、只读文本
 - key presets：schema 只写 key，label 与 widget 统一配置，内置中英文常用标签
 - 声明式条件：`and` / `or` / `not` 组合，自动追踪依赖

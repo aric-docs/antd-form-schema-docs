@@ -1,11 +1,11 @@
 ---
-title: Playground
+title: 演练场
 order: 1
 ---
 
-# Playground
+# 演练场
 
-下面几个 demo 覆盖 `@jswork/antd-form-schema` 最常用的场景：基础表单、key presets、声明式条件、字段值转换器和查看/编辑切换。
+下面几个示例覆盖 `@jswork/antd-form-schema` 最常用的场景：基础表单、key 预设、声明式条件、字段值转换器和查看/编辑切换。
 
 ## 基础表单
 
@@ -13,11 +13,11 @@ order: 1
 
 <code src="./demos/basic-form.tsx">基础表单</code>
 
-## Key Presets
+## key 预设
 
 schema 里只写 key，label 和 widget 由一份 presets 文件统一提供，并支持中英文切换。
 
-<code src="./demos/presets.tsx">Key Presets</code>
+<code src="./demos/presets.tsx">key 预设</code>
 
 ## 条件显示
 

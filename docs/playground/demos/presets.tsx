@@ -59,7 +59,7 @@ export default () => {
           optionType="button"
           options={[
             { label: '中文', value: 'zh-CN' },
-            { label: 'English', value: 'en-US' },
+            { label: '英文', value: 'en-US' },
           ]}
         />
       </div>

@@ -1,99 +1,96 @@
 ---
-title: Configuration
+title: 文档站配置
 order: 1
 ---
 
-# Configuration
+# 文档站配置
 
-Learn how to customize your dumi documentation site.
+本站基于 dumi 2 构建，主配置文件是项目根目录下的 `.dumirc.ts`。
 
-## Dumi Configuration
+## 基础配置
 
-The main configuration file is `.dumirc.ts` in the project root.
-
-### Basic Configuration
-
-```typescript
+```ts
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
-  // Site base path (useful for GitHub Pages)
+  // 站点基础路径，部署到 GitHub Pages 子目录时需要
   base: '/antd-form-schema-docs/',
 
-  // Public path for assets
+  // 静态资源公共路径
   publicPath: '/antd-form-schema-docs/',
 
-  // Site logo
+  // 站点 logo
   logo: '/antd-form-schema-docs/logo.png',
 
-  // Locales / languages
-  locales: [{ id: 'en-US', name: 'English' }],
+  // 语言
+  locales: [{ id: 'zh-CN', name: '中文' }],
 
-  // Resolve configuration
+  // 代码块解析方式
   resolve: {
-    codeBlockMode: 'passive', // 'passive' | 'active'
+    codeBlockMode: 'passive', // 'passive' 普通代码块 | 'active' 可交互
   },
 
-  // Theme configuration
+  // 主题
   themeConfig: {
-    name: 'Your Site Name',
-    description: 'Your site description',
+    name: 'antd-form-schema 文档',
+    description: 'Ant Design 表单 schema 渲染器。',
     nav: [
-      {
-        title: 'Guide',
-        link: '/guide/getting-started.md',
-      },
+      { title: '指南', link: '/guide/getting-started' },
+      { title: '组件', link: '/components' },
+      { title: '演练场', link: '/playground' },
     ],
     nprogress: true,
     socialLinks: {
-      github: 'https://github.com/your-username/your-repo',
+      github: 'https://github.com/afeiship/antd-form-schema',
     },
   },
 
-  // Custom styles
-  styles: [`/* Your custom CSS here */`],
+  // 自定义样式
+  styles: ['/* 在这里写自定义 CSS */'],
 });
 ```
 
-## Navigation
+## 导航
 
-Configure the navigation menu in `themeConfig.nav`:
+`themeConfig.nav` 控制顶部导航：
 
-```typescript
+```ts
 nav: [
   {
-    title: 'Guide',           // Nav item title
-    link: '/guide/index',     // Link to page
+    title: '指南',              // 导航标题
+    link: '/guide/getting-started', // 站内路径
   },
   {
-    title: 'Components',
-    link: '/components/index',
+    title: '组件',
+    link: '/components',
   },
   {
-    title: 'External',
-    link: 'https://example.com', // External links work too
+    title: 'GitHub',
+    link: 'https://github.com/afeiship/antd-form-schema', // 支持外链
   },
 ],
 ```
 
-## Sidebar
+## 侧边栏
 
-Dumi automatically generates sidebars based on your file structure:
+dumi 会根据目录结构自动生成侧边栏，顺序由每个 Markdown 文件 frontmatter 里的 `order` 决定：
 
-```
+```text
 docs/
 ├── guide/
 │   ├── getting-started.md    # /guide/getting-started
-│   └── configuration.md      # /guide/configuration
+│   ├── configuration.md      # /guide/configuration
+│   ├── deployment.md         # /guide/deployment
+│   └── form-schema.md        # /guide/form-schema
 └── components/
-    └── index.md              # /components/index
+    └── index.md              # /components
 ```
 
-## Custom Styles
+## 自定义样式
 
-Add custom styles in the `styles` option:
+在 `styles` 中传入 CSS 字符串：
 
-```typescript
+```ts
 styles: [
   `
   .dumi-default-sidebar {
@@ -103,26 +100,28 @@ styles: [
 ],
 ```
 
-## Code Blocks
+## 代码块
 
-Configure code block behavior:
+`resolve.codeBlockMode` 决定代码块是否变成可运行示例：
 
-```typescript
+```ts
 resolve: {
-  // 'active' - shows React Playground for React code
-  // 'passive' - plain code blocks
+  // active：React 代码渲染为可交互演练场
+  // passive：只显示普通代码块
   codeBlockMode: 'passive',
 },
 ```
 
-## Modes
+文档里的 `<code src="./demos/xxx.tsx">` 仍会渲染真实 demo，不受这个配置影响。
 
-Dumi supports different modes:
+## 运行模式
 
-- **Doc Mode** - Standard documentation pages
-- **Demo Mode** - Component demos with live preview
-- **Site Mode** - General-purpose website
+dumi 支持三种模式：
 
-## More Configuration Options
+- **文档模式**：标准文档页面，本站使用这一模式。
+- **演示模式**：组件 demo 带实时预览。
+- **站点模式**：通用网站。
 
-See the [official dumi documentation](https://d.umijs.org/config) for all available options.
+## 更多配置
+
+完整配置项见 [dumi 官方文档](https://d.umijs.org/config)。

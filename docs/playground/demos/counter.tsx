@@ -5,8 +5,8 @@ export default () => {
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h2>Interactive Counter</h2>
-      <p style={{ fontSize: '24px', fontWeight: 'bold' }}>Count: {count}</p>
+      <h2>交互计数器</h2>
+      <p style={{ fontSize: '24px', fontWeight: 'bold' }}>当前值：{count}</p>
       <button
         onClick={() => setCount(count + 1)}
         style={{
@@ -19,7 +19,7 @@ export default () => {
           borderRadius: '4px',
         }}
       >
-        Increment
+        增加
       </button>
       <button
         onClick={() => setCount(0)}
@@ -34,7 +34,7 @@ export default () => {
           marginLeft: '10px',
         }}
       >
-        Reset
+        重置
       </button>
     </div>
   );

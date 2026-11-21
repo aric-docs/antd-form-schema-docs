@@ -1,73 +1,72 @@
 ---
-title: Dumi Docs Template
+title: antd-form-schema 文档
 hero:
-  title: Dumi Docs Template
-  description: A template project for building documentation sites with dumi.
+  title: antd-form-schema
+  description: 用一份 schema 描述 Ant Design 表单的字段、校验、条件、标签和值转换。
   actions:
-    - text: Get Started
+    - text: 快速开始
       link: /guide/getting-started
     - text: GitHub
-      link: https://github.com/afeiship/antd-form-schema-docs
+      link: https://github.com/afeiship/antd-form-schema
 features:
-  - title: Dumi Powered
-    emoji: 📖
-    description: Built with dumi, a excellent doc tool for component library developers
-  - title: PWA Ready
-    emoji: 🚀
-    description: Out-of-the-box PWA support with workbox for better performance
-  - title: Type-Safe
-    emoji: 🔒
-    description: Full TypeScript support with comprehensive type definitions
-  - title: Modern Tooling
-    emoji: 🛠️
-    description: Pre-configured with husky, commitlint, lint-staged, and prettier
-  - title: Easy to Deploy
-    emoji: 🌐
-    description: Build static sites ready for GitHub Pages, Netlify, or Vercel
-  - title: Customizable
-    emoji: 🎨
-    description: Flexible theme configuration with sidebar, navigation, and social links
+  - title: 数据驱动
+    emoji: 📋
+    description: 字段、校验、条件、标签和控件全部写在 schema 里，布局仍由 JSX 控制。
+  - title: key 预设
+    emoji: 🏷️
+    description: schema 只写 key，label 与 widget 从统一配置自动补齐，内置常用中英文标签。
+  - title: 条件联动
+    emoji: 🔀
+    description: 声明式 and / or / not 组合，自动追踪依赖字段，不需要手写 onValuesChange。
+  - title: 值转换器
+    emoji: 🔁
+    description: 存储值与控件值双向转换，支持链式组合和表单级默认配置。
+  - title: 查看 / 编辑
+    emoji: 👁️
+    description: 同一份 schema 在编辑态与只读详情态之间切换，枚举值自动显示 label。
+  - title: 可扩展
+    emoji: 🧩
+    description: 自定义 widget、classNames、slots，并提供无 UI 的 useFormSchema。
 ---
 
-## Installation
+## 安装
 
 ```bash
-# Clone this template
-git clone https://github.com/afeiship/antd-form-schema-docs.git
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
+pnpm add @jswork/antd-form-schema antd
 ```
 
-## Quick Start
+## 快速开始
 
-```bash
-# Start development server
-npm run dev
+```tsx
+import { Button } from 'antd';
+import { SchemaForm } from '@jswork/antd-form-schema';
+import type { FormSchema } from '@jswork/antd-form-schema';
 
-# Build for production
-npm run build
+const meta: FormSchema = {
+  initialValues: { name: '', role: 'user' },
+  fields: [
+    { key: 'name', label: '姓名', widget: 'input', required: true },
+    {
+      key: 'role',
+      label: '角色',
+      widget: 'select',
+      options: [
+        { value: 'admin', label: '管理员' },
+        { value: 'user', label: '普通用户' },
+      ],
+    },
+  ],
+};
 
-# Preview production build
-npm run preview
+<SchemaForm meta={meta} onFinish={(values) => console.log(values)}>
+  <Button type="primary" htmlType="submit">
+    提交
+  </Button>
+</SchemaForm>;
 ```
 
-## Tailwind Demo
+## 文档导航
 
-<div class="debug x-5 p-2 hover:debug-blue rounded bg-slate-100">
-  <button class="bg-blue-500 text-white px-4 py-2 rounded-md">Get Started</button>
-  <button class="bg-red-200 px-4 py-2 rounded-md">Show Demo</button>
-</div>
-
-## Documentation
-
-- [Guide](/guide/getting-started) - Get started with the template
-- [Configuration](/guide/configuration) - Customize your documentation site
-- [Deployment](/guide/deployment) - Deploy your documentation site
-
-```
-
-```
+- [快速开始](/guide/getting-started) — 安装、渲染入口和目录结构
+- [表单 Schema 全指南](/guide/form-schema) — 全部配置项与特性
+- [演练场](/playground) — 可直接运行的常用示例

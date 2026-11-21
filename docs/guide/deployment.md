@@ -1,47 +1,46 @@
 ---
-title: Deployment
+title: 部署
 order: 2
 ---
 
-# Deployment
+# 部署
 
-Learn how to deploy your dumi documentation site.
+本站是纯静态站点，构建产物可以直接放到任意静态托管服务。
 
-## Build for Production
+## 构建生产版本
 
 ```bash
 npm run build
 ```
 
-This will:
+构建会做三件事：
 
-1. Build your documentation site
-2. Generate PWA service worker (via workbox)
-3. Output to `dist/` directory
+1. 使用 dumi 生成静态页面；
+2. 通过 workbox 生成 PWA service worker；
+3. 把产物输出到 `dist/`。
 
-## Deployment Options
+## 部署方式
 
 ### GitHub Pages
 
-1. Update `.dumirc.ts`:
+1. 修改 `.dumirc.ts` 中的路径：
 
-```typescript
+```ts
 export default defineConfig({
   base: '/your-repo-name/',
   publicPath: '/your-repo-name/',
 });
 ```
 
-2. Build and deploy:
+2. 构建并使用 `gh-pages` 发布：
 
 ```bash
 npm run build
 
-# Deploy using gh-pages
 npx gh-pages -d dist
 ```
 
-Or add a deploy script to `package.json`:
+也可以把发布命令写进 `package.json`：
 
 ```json
 {
@@ -53,71 +52,67 @@ Or add a deploy script to `package.json`:
 
 ### Netlify
 
-1. Connect your repository to Netlify
-2. Configure build settings:
+1. 在 Netlify 中关联仓库；
+2. 配置构建参数：
 
-```
-Build command: npm run build
-Publish directory: dist
+```text
+构建命令：npm run build
+发布目录：dist
 ```
 
-3. Deploy automatically on push
+3. 之后每次 push 自动部署。
 
 ### Vercel
 
-1. Connect your repository to Vercel
-2. Configure build settings:
+1. 在 Vercel 中关联仓库；
+2. 配置构建参数：
 
+```text
+构建命令：npm run build
+输出目录：dist
 ```
-Build command: npm run build
-Output directory: dist
-```
 
-3. Deploy automatically on push
+3. 之后每次 push 自动部署。
 
-### Custom Server
+### 自有服务器
 
-Serve the `dist/` directory with any static file server:
+把 `dist/` 交给任意静态文件服务器即可：
 
 ```bash
-# Using serve
+# 使用 serve
 npx serve dist
 
-# Using http-server
+# 使用 http-server
 npx http-server dist
 ```
 
-## PWA Support
+## PWA
 
-This template includes PWA support via workbox. The service worker is automatically generated during build.
+项目通过 workbox 提供 PWA 能力，构建时会自动生成 service worker。
 
-### Configure Workbox
+缓存策略在 `workbox-config.cjs` 中调整：
 
-Edit `workbox-config.cjs`:
-
-```javascript
+```js
 module.exports = {
   globDirectory: 'dist/',
   globPatterns: ['**/*.{js,png,svg,json,txt,css,map}'],
   swDest: 'dist/sw.js',
   runtimeCaching: [
-    // Add your caching strategies
+    // 在这里添加运行时缓存策略
   ],
 };
 ```
 
-## Environment Variables
+## 环境变量
 
-You can use environment variables in your documentation:
+`.dumirc.ts` 中可以直接读取环境变量：
 
 ```bash
 # .env
 MY_VARIABLE=value
 ```
 
-Access in `.dumirc.ts`:
-
-```typescript
+```ts
 export default defineConfig({
   themeConfig: {
     name: process.env.MY_VARIABLE,
@@ -125,18 +120,18 @@ export default defineConfig({
 });
 ```
 
-## Preview Before Deploy
+## 部署前预览
 
 ```bash
 npm run build
 npm run preview
 ```
 
-This serves the production build locally for testing.
+`preview` 会在本地启动生产构建，方便上线前检查。
 
 ## CI/CD
 
-### GitHub Actions Example
+GitHub Actions 示例：
 
 ```yaml
 name: Deploy

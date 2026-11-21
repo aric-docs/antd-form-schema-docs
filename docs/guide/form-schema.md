@@ -5,7 +5,7 @@ order: 3
 
 # 表单 Schema 全指南
 
-`@jswork/antd-form-schema` 是一个 headless 的 Ant Design 表单 schema 渲染器：字段、校验、条件、标签、控件和值转换全部由数据描述，布局留在 JSX 里。
+`@jswork/antd-form-schema` 是一个无 UI 的 Ant Design 表单 schema 渲染器：字段、校验、条件、标签、控件和值转换全部由数据描述，布局留在 JSX 里。
 
 ## 安装
 
@@ -49,7 +49,7 @@ const meta: FormSchema = {
 | --------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `SchemaForm`    | 最常见。内部创建并管理 antd `Form`，自动注入 `meta.initialValues`，支持 `onFinish`、异步 meta、loading / error。 |
 | `SchemaFields`  | 已经有自己的 `<Form>`。只渲染字段，不创建 Form；必须放在 Form 内。                                               |
-| `useFormSchema` | 完全 headless。返回 `BoundField[]`，由调用方决定每个字段的布局、分组、分步和样式。                               |
+| `useFormSchema` | 完全无 UI。返回 `BoundField[]`，由调用方决定每个字段的布局、分组、分步和样式。                                   |
 | `FormFields`    | 轻量渲染器，接收 `useFormSchema` 返回的字段并渲染成 antd `Form.Item`。                                           |
 
 `useFormSchema` 的典型用法：
@@ -97,7 +97,7 @@ const { visibleFields } = useFormSchema(meta, form, {
 
 `SchemaFields` 接收同样的 `meta`、`widgets`、`presets`、`locale`、`converters`、`classNames`、`slots`、`loading`、`error`，但不创建 Form，必须放在 `<Form>` 内。
 
-`FormFields` 只接收 `fields: BoundField[]`，按字段默认渲染 Form.Item，适合不需要自定义布局的 headless 场景。
+`FormFields` 只接收 `fields: BoundField[]`，按字段默认渲染 Form.Item，适合不需要自定义布局的 无 UI 场景。
 
 ## FormSchema 顶层配置
 

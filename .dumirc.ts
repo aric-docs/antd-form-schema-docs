@@ -8,30 +8,30 @@ export default defineConfig({
   base: '/antd-form-schema-docs/',
   publicPath: '/antd-form-schema-docs/',
   logo: '/antd-form-schema-docs/logo.png',
-  locales: [{ id: 'en-US', name: 'English' }],
+  locales: [{ id: 'zh-CN', name: '中文' }],
   resolve: {
     codeBlockMode: 'passive',
   },
   themeConfig: {
-    name: 'antd-form-schema-docs',
-    description: 'antd-form-schema docs.',
+    name: 'antd-form-schema 文档',
+    description: 'Ant Design 表单 schema 渲染器文档。',
     nav: [
       {
-        title: 'Guide',
+        title: '指南',
         link: '/guide/getting-started',
       },
       {
-        title: 'Components',
+        title: '组件',
         link: '/components',
       },
       {
-        title: 'Playground',
+        title: '演练场',
         link: '/playground',
       },
     ],
     nprogress: true,
     socialLinks: {
-      github: 'https://github.com/aric-tpls/antd-form-schema-docs',
+      github: 'https://github.com/afeiship/antd-form-schema',
     },
   },
   plugins: ['@umijs/plugins/dist/tailwindcss'],
