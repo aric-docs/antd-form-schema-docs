@@ -12,7 +12,7 @@ Welcome to the antd-form-schema-docs template guide. This section will help you 
 - [Getting Started](./getting-started) - Installation and basic usage
 - [Configuration](./configuration) - Customize your documentation site
 - [Deployment](./deployment) - Deploy your documentation site
-- [Field Converters](./converters) - Adapt stored values and compose converter chains
+- [字段值转换器](./converters) - 存储值与控件值的双向适配，支持链式组合
 
 ## Quick Links
 
