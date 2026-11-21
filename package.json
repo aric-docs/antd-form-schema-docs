@@ -27,9 +27,11 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@jswork/antd-form-schema": "^1.0.1",
     "@jswork/presets-tailwind": "^1.2.37",
     "@types/react": "^19.2.9",
     "@umijs/plugins": "^4.6.25",
+    "antd": "^5.29.3",
     "autoprefixer": "^10.4.24",
     "dumi": "^2.4.13",
     "husky": "^8.0.1",

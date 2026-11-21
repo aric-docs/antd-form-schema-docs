@@ -5,21 +5,34 @@ order: 1
 
 # Playground
 
-Welcome to the interactive playground! Here you can explore live demos with real-time editing capabilities.
+下面几个 demo 覆盖 `@jswork/antd-form-schema` 最常用的场景：基础表单、key presets、声明式条件、字段值转换器和查看/编辑切换。
 
-## Features
+## 基础表单
 
-- **Live Editing** - Edit code and see changes immediately
-- **Interactive Demos** - All examples are runnable and editable
-- **Type-Safe** - Full TypeScript support
-- **Best Practices** - Examples following industry standards
+字段、初始值、校验和提交结果。
 
-## Demo Example
+<code src="./demos/basic-form.tsx">基础表单</code>
 
-Here's a simple interactive counter example to get started:
+## Key Presets
 
-<code src="./demos/counter.tsx">Interactive Counter</code>
+schema 里只写 key，label 和 widget 由一份 presets 文件统一提供，并支持中英文切换。
 
-## Getting Started
+<code src="./demos/presets.tsx">Key Presets</code>
 
-You can create your own playground examples by creating markdown files in the `playground` directory. Use the code block syntax with `tsx` or `jsx` language to create interactive demos.
+## 条件显示
+
+用声明式 condition 控制字段显隐，依赖字段变化后自动重新计算，不需要手写 `onValuesChange`。
+
+<code src="./demos/conditional.tsx">条件显示</code>
+
+## 字段值转换器
+
+`meta.converters` 配置全局转换器，支持单个 id 或按顺序执行的链。
+
+<code src="./demos/converters.tsx">字段值转换器</code>
+
+## 查看 / 编辑
+
+同一份 schema 在编辑态和只读详情态之间切换，view 模式自动把枚举值显示为选项 label。
+
+<code src="./demos/view-edit.tsx">查看 / 编辑</code>
