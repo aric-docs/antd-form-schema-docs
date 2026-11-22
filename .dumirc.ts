@@ -25,6 +25,10 @@ export default defineConfig({
         link: '/components',
       },
       {
+        title: 'CRUD 列表',
+        link: '/guide/list-query-plugins',
+      },
+      {
         title: '演练场',
         link: '/playground',
       },

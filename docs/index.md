@@ -27,6 +27,9 @@ features:
   - title: 可扩展
     emoji: 🧩
     description: 自定义 widget、classNames、slots，并提供无 UI 的 useFormSchema。
+  - title: 列表查询插件
+    emoji: 🔎
+    description: 配套的 SchemaCrudList 用 query.slots 接入查询控件，内置 keywords / status，并支持 defineQueryPlugin 自定义插件。
 ---
 
 ## 安装
@@ -69,4 +72,5 @@ const meta: FormSchema = {
 
 - [快速开始](/guide/getting-started) — 安装、渲染入口和目录结构
 - [表单 Schema 全指南](/guide/form-schema) — 全部配置项与特性
+- [CRUD 列表查询插件](/guide/list-query-plugins) — 内置插件与自定义插件
 - [演练场](/playground) — 可直接运行的常用示例

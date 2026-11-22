@@ -11,7 +11,8 @@ order: 0
 
 1. [表单 Schema 全指南](./form-schema) — 覆盖 `SchemaForm`、`SchemaFields`、`useFormSchema`、widgets、presets、条件、查看态、converters、classNames/slots、异步 meta 等全部特性。
 2. [项目级默认配置](./project-defaults) — 用 `configureSchemaForm` 统一 `presets`、`converters` 和 `locale`。
-3. [演练场](/playground) — 常用场景的可运行示例。
+3. [CRUD 列表查询插件](./list-query-plugins) — `SchemaCrudList` 的 `query.slots`、内置 `keywords` / `status` 与外部 `defineQueryPlugin`。
+4. [演练场](/playground) — 常用场景的可运行示例。
 
 ## 特性一览
 
@@ -24,6 +25,7 @@ order: 0
 - 整表 `Descriptions` 查看态 / 字段级只读，枚举值自动显示 label
 - 自定义 widget、classNames 和 slots
 - 异步 meta、提交前整表转换
+- CRUD 列表查询区：`query.slots`、内置 `keywords` / `status` 插件和外部 `defineQueryPlugin`
 
 ## 相关链接
 
